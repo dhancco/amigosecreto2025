@@ -2,60 +2,109 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎁 Familiar Secreto 2025</title>
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0f5132, #198754);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .card {
-      background: white;
-      padding: 20px;
-      margin: 80px auto;
-      width: 360px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background: #ffffff;
+      padding: 22px;
+      width: 100%;
+      max-width: 380px;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      border-top: 6px solid #dc3545;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #dc3545;
+      font-weight: bold;
     }
 
     select {
       width: 100%;
-      padding: 8px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ced4da;
       margin-top: 10px;
+      background: #fff;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #198754;
     }
 
     .regalos {
-      margin-top: 15px;
+      margin-top: 18px;
     }
 
     .regalo {
       display: flex;
       align-items: center;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 8px;
-      margin-bottom: 8px;
-      background: #fafafa;
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      transition: transform 0.15s ease;
+    }
+
+    .regalo:hover {
+      transform: scale(1.02);
     }
 
     .regalo img {
       width: 55px;
       height: 55px;
       object-fit: cover;
-      border-radius: 6px;
+      border-radius: 8px;
       margin-right: 10px;
+      flex-shrink: 0;
+      border: 2px solid #198754;
     }
 
     .regalo span {
-      font-size: 14px;
+      font-size: 15px;
+      color: #212529;
+      line-height: 1.4;
     }
 
     .no-opciones {
-      margin-top: 10px;
-      color: #999;
-      font-style: italic;
+      margin-top: 15px;
       text-align: center;
+      color: #6c757d;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 12px;
+      color: #adb5bd;
+    }
+
+    @media (max-width: 360px) {
+      h2 {
+        font-size: 18px;
+      }
+      .regalo span {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -63,7 +112,7 @@
 <body>
 
 <div class="card">
-  <h2>🎄 Familiar Secreto 2025</h2>
+  <h2>🎄 Familiar Secreto 2025 🎁</h2>
 
   <select id="persona">
     <option value="">-- Selecciona un nombre --</option>
@@ -81,6 +130,8 @@
   </select>
 
   <div id="lista" class="regalos"></div>
+
+  <footer>🎅 Hecho con espíritu navideño</footer>
 </div>
 
 <script>
@@ -91,56 +142,47 @@ const regalos = {
     { nombre: "Six pack de medias Adidas" },
     { nombre: "Recarga hojas de afeitar" }
   ],
-
   "Jaqueline": [
     { nombre: "Sandalias blancas" },
     { nombre: "Neceser"}
   ],
-
   "Fiorela": [
     { nombre: "Pijama / Polo Stranger Things (L)" },
     { nombre: "Gorra o lentes de sol" },
     { nombre: "Mini parlante o reloj" }
   ],
-
   "Elvia": [
     { nombre: "Orquídea o mini orquídea" },
     { nombre: "Billetera con cierre" },
     { nombre: "Leggins talla L" }
   ],
-
   "Daniel": [
-    { nombre: "Soporte de Audifonos de mesa" },
-    { nombre: "Atril de partitura estilo minimalista" },
+    { nombre: "Soporte de audífonos de mesa" },
+    { nombre: "Atril de partitura minimalista" },
     { nombre: "Tomatodo de 2 litros"}
   ],
-
   "Karen": [
     { nombre: "Sandalias de casa" },
     { nombre: "Tomatodo" },
     { nombre: "Crema hidratante corporal"}
   ],
-
   "Matthews": [
     { nombre: "Polo deportivo"},
     { nombre: "Polo básico marrón" }
   ],
-
   "Raquel": [
     { nombre: "Ventilador de escritorio" },
     { nombre: "Mochila pequeña"},
     { nombre: "Mini waflera + kekera" }
   ],
-
   "Eduardo": [
     { nombre: "Compresor deportivo manga larga (M)" },
     { nombre: "Tomatodo resistente (1L)" }
   ],
-
   "Guillermo": [
-    { nombre: "Maletin de negocios ejecutivos" },
+    { nombre: "Maletín ejecutivo" },
     { nombre: "Soporte de cámara universal"},
-    { nombre: "Un reloj para hombres elegantes" }
+    { nombre: "Reloj elegante para hombre" }
   ],
   "Maricela": []
 };
@@ -153,23 +195,21 @@ document.getElementById("persona").addEventListener("change", function () {
   if (!nombre) return;
 
   if (!regalos[nombre] || regalos[nombre].length === 0) {
-    contenedor.innerHTML = `<div class="no-opciones">No dejó opciones 😅</div>`;
+    contenedor.innerHTML = `<div class="no-opciones">🎅 No dejó opciones 😅</div>`;
     return;
   }
 
   regalos[nombre].forEach(r => {
     const div = document.createElement("div");
     div.className = "regalo";
+
     let html = "";
+    if (r.img) {
+      html += `<img src="${r.img}" alt="${r.nombre}">`;
+    }
+    html += `<span>🎁 ${r.nombre}</span>`;
 
-if (r.img) {
-  html += `<img src="${r.img}" alt="${r.nombre}">`;
-}
-
-html += `<span>${r.nombre}</span>`;
-
-div.innerHTML = html;
-
+    div.innerHTML = html;
     contenedor.appendChild(div);
   });
 });
