@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🎁 Amigo Secreto</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; }
+    .card { background: white; padding: 20px; margin: 50px auto; width: 360px; border-radius: 10px; }
+    select { width: 100%; padding: 8px; }
+    ul { margin-top: 15px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>🎄 Amigo Secreto</h2>
+
+  <select onchange="mostrar(this.value)">
+    <option value="">-- Selecciona un nombre --</option>
+    <option value="Carlos">David</option>
+    <option value="María">Jaqui</option>
+    <option value="José">Fiorela</option>
+  </select>
+
+  <ul id="lista"></ul>
+</div>
+
+<script>
+const regalos = {
+  "David": ["Audífonos", "Billetera", "Polo"],
+  "Jaqui": ["Libro", "Taza personalizada", "Agenda"],
+  "Fiorela": ["Café", "Medias", "Gorra"]
+};
+
+function mostrar(nombre) {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+  if (regalos[nombre]) {
+    regalos[nombre].forEach(r => {
+      const li = document.createElement("li");
+      li.textContent = r;
+      lista.appendChild(li);
+    });
+  }
+}
+</script>
+
+</body>
+</html>
