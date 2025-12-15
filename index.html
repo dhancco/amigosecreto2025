@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>🎁 Amigo Secreto</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f4;
     }
+
     .card {
       background: white;
       padding: 20px;
@@ -16,16 +18,48 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
+
     select {
       width: 100%;
       padding: 8px;
       margin-top: 10px;
     }
-    ul {
+
+    .regalos {
       margin-top: 15px;
+    }
+
+    .regalo {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 8px;
+      margin-bottom: 8px;
+      background: #fafafa;
+    }
+
+    .regalo img {
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-right: 10px;
+    }
+
+    .regalo span {
+      font-size: 14px;
+    }
+
+    .no-opciones {
+      margin-top: 10px;
+      color: #999;
+      font-style: italic;
+      text-align: center;
     }
   </style>
 </head>
+
 <body>
 
 <div class="card">
@@ -46,36 +80,84 @@
     <option value="Maricela">Maricela</option>
   </select>
 
-  <ul id="lista"></ul>
+  <div id="lista" class="regalos"></div>
 </div>
 
 <script>
 const regalos = {
-  "David": ["Mouse Inalambrico", "Polo Azul con Cuello", "Six Pack de Medias Adidas","Recarga de Hojas de Afeitar"],
-  "Jaqueline": ["Sandalias Blancas", "Neceser"],
-  "Fiorela": ["Pijama/polo de Stranger Things L", "Gorra/lentes de sol", "Mini parlante/reloj"],
-  "Elvia": ["Una orquidea o mini orquidea(cualquier color)", "Una billetera(con monedero con cierre) color negro/beige", "Un leggins(color negro/azul/ talla L)"],
-  "Daniel": ["NO PUSO SUS OPCIONES"],
-  "Karen": ["Sandalias de casa blancas, negras o beige", "Tomatodo beigue, transparente", "Crema Hidratante Corporal Cera V"],
-  "Matthews": ["Polo deportivo", "Polo basico color marron"],
-  "Raquel": ["Ventilador mediano para escritorio de preferencia color negro.", "Mochila pequeña color negro/nude/rosa", "Miniwaflera + kekera"],
-  "Eduardo": ["Compresor deportivo de calidad manga larga color negro - talla M.", "Tomatodo de calidad resistente 1 litro o más, colores oscuros."],
-  "Guillermo": ["NO PUSO SUS OPCIONES"],
-  "Maricela": ["NO PUSO SUS OPCIONES"]
+  "David": [
+    { nombre: "Mouse Inalámbrico", img: "https://cdn-icons-png.flaticon.com/512/892/892692.png" },
+    { nombre: "Polo azul con cuello", img: "https://cdn-icons-png.flaticon.com/512/892/892458.png" },
+    { nombre: "Six pack de medias Adidas", img: "https://cdn-icons-png.flaticon.com/512/892/892509.png" },
+    { nombre: "Recarga hojas de afeitar", img: "https://cdn-icons-png.flaticon.com/512/2965/2965567.png" }
+  ],
+
+  "Jaqueline": [
+    { nombre: "Sandalias blancas", img: "https://cdn-icons-png.flaticon.com/512/892/892455.png" },
+    { nombre: "Neceser", img: "https://cdn-icons-png.flaticon.com/512/892/892430.png" }
+  ],
+
+  "Fiorela": [
+    { nombre: "Pijama / Polo Stranger Things (L)", img: "https://cdn-icons-png.flaticon.com/512/892/892458.png" },
+    { nombre: "Gorra o lentes de sol", img: "https://cdn-icons-png.flaticon.com/512/892/892453.png" },
+    { nombre: "Mini parlante o reloj", img: "https://cdn-icons-png.flaticon.com/512/727/727245.png" }
+  ],
+
+  "Elvia": [
+    { nombre: "Orquídea o mini orquídea", img: "https://cdn-icons-png.flaticon.com/512/766/766113.png" },
+    { nombre: "Billetera con cierre", img: "https://cdn-icons-png.flaticon.com/512/892/892432.png" },
+    { nombre: "Leggins talla L", img: "https://cdn-icons-png.flaticon.com/512/892/892458.png" }
+  ],
+
+  "Daniel": [],
+
+  "Karen": [
+    { nombre: "Sandalias de casa", img: "https://cdn-icons-png.flaticon.com/512/892/892455.png" },
+    { nombre: "Tomatodo", img: "https://cdn-icons-png.flaticon.com/512/2972/2972185.png" },
+    { nombre: "Crema hidratante corporal", img: "https://cdn-icons-png.flaticon.com/512/2965/2965527.png" }
+  ],
+
+  "Matthews": [
+    { nombre: "Polo deportivo", img: "https://cdn-icons-png.flaticon.com/512/892/892458.png" },
+    { nombre: "Polo básico marrón", img: "https://cdn-icons-png.flaticon.com/512/892/892458.png" }
+  ],
+
+  "Raquel": [
+    { nombre: "Ventilador de escritorio", img: "https://cdn-icons-png.flaticon.com/512/869/869869.png" },
+    { nombre: "Mochila pequeña", img: "https://cdn-icons-png.flaticon.com/512/892/892433.png" },
+    { nombre: "Mini waflera + kekera", img: "https://cdn-icons-png.flaticon.com/512/1046/1046857.png" }
+  ],
+
+  "Eduardo": [
+    { nombre: "Compresor deportivo manga larga (M)", img: "https://cdn-icons-png.flaticon.com/512/892/892458.png" },
+    { nombre: "Tomatodo resistente (1L)", img: "https://cdn-icons-png.flaticon.com/512/2972/2972185.png" }
+  ],
+
+  "Guillermo": [],
+  "Maricela": []
 };
 
 document.getElementById("persona").addEventListener("change", function () {
   const nombre = this.value;
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
+  const contenedor = document.getElementById("lista");
+  contenedor.innerHTML = "";
 
-  if (regalos[nombre]) {
-    regalos[nombre].forEach(opcion => {
-      const li = document.createElement("li");
-      li.textContent = opcion;
-      lista.appendChild(li);
-    });
+  if (!nombre) return;
+
+  if (!regalos[nombre] || regalos[nombre].length === 0) {
+    contenedor.innerHTML = `<div class="no-opciones">No dejó opciones 😅</div>`;
+    return;
   }
+
+  regalos[nombre].forEach(r => {
+    const div = document.createElement("div");
+    div.className = "regalo";
+    div.innerHTML = `
+      <img src="${r.img}" alt="${r.nombre}">
+      <span>${r.nombre}</span>
+    `;
+    contenedor.appendChild(div);
+  });
 });
 </script>
 
