@@ -4,10 +4,26 @@
   <meta charset="UTF-8">
   <title>🎁 Amigo Secreto</title>
   <style>
-    body { font-family: Arial; background: #f4f4f4; }
-    .card { background: white; padding: 20px; margin: 50px auto; width: 360px; border-radius: 10px; }
-    select { width: 100%; padding: 8px; }
-    ul { margin-top: 15px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 80px auto;
+      width: 360px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+    }
+    ul {
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -15,11 +31,11 @@
 <div class="card">
   <h2>🎄 Amigo Secreto</h2>
 
-  <select onchange="mostrar(this.value)">
+  <select id="persona">
     <option value="">-- Selecciona un nombre --</option>
-    <option value="Carlos">David</option>
-    <option value="María">Jaqui</option>
-    <option value="José">Fiorela</option>
+    <option value="David">David</option>
+    <option value="Carlos">Carlos</option>
+    <option value="María">María</option>
   </select>
 
   <ul id="lista"></ul>
@@ -27,22 +43,24 @@
 
 <script>
 const regalos = {
-  "David": ["Audífonos", "Billetera", "Polo"],
-  "Jaqui": ["Libro", "Taza personalizada", "Agenda"],
-  "Fiorela": ["Café", "Medias", "Gorra"]
+  "David": ["Libro", "Audífonos", "Café"],
+  "Carlos": ["Billetera", "Polo", "Gorra"],
+  "María": ["Agenda", "Taza personalizada", "Chocolates"]
 };
 
-function mostrar(nombre) {
+document.getElementById("persona").addEventListener("change", function () {
+  const nombre = this.value;
   const lista = document.getElementById("lista");
   lista.innerHTML = "";
+
   if (regalos[nombre]) {
-    regalos[nombre].forEach(r => {
+    regalos[nombre].forEach(opcion => {
       const li = document.createElement("li");
-      li.textContent = r;
+      li.textContent = opcion;
       lista.appendChild(li);
     });
   }
-}
+});
 </script>
 
 </body>
