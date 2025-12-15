@@ -152,10 +152,16 @@ document.getElementById("persona").addEventListener("change", function () {
   regalos[nombre].forEach(r => {
     const div = document.createElement("div");
     div.className = "regalo";
-    div.innerHTML = `
-      <img src="${r.img}" alt="${r.nombre}">
-      <span>${r.nombre}</span>
-    `;
+    let html = "";
+
+if (r.img) {
+  html += `<img src="${r.img}" alt="${r.nombre}">`;
+}
+
+html += `<span>${r.nombre}</span>`;
+
+div.innerHTML = html;
+
     contenedor.appendChild(div);
   });
 });
